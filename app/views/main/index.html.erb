@@ -41,11 +41,11 @@ reversed.each_key do |key|
       <%if walk.finished?%>
       <emph><%= Time.at(walk.time_finish).strftime(format_only_time)%></emph> <i class="fas fa-equals"></i><i class="fas fa-stopwatch-20"></i>
        <%= walk.duration_str %> <i class="fas fa-location-arrow"></i> <strong><%= walk.distance_str %></strong> 
+       <button><i class="fas fa-code-branch i-btn"></i> Continue walking</button>
       <% end %>
     <% unless walk.finished? %>
-      <span class="counter-stopper" data-walk-id="<%= walk.id %>" data-start-timestamp="<%= walk.time_start %>"><span>(time)</span><button>Stop</button></span>
+      <span class="counter-stopper" data-walk-id="<%= walk.id %>" data-start-timestamp="<%= walk.time_start %>"><span>(time)</span> <button>Stop</button></span>
     <% end %>
-    <button><i class="fas fa-code-branch i-btn"></i> Continue walking</button>
     </div>
   <% end %>
 <% end %>
