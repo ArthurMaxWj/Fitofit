@@ -15,7 +15,7 @@ class Walk < ApplicationRecord
 
   def duration_str
     non_zero = ->(num){ num.negative? ? 0 : num }
-    fill = ->(num){ num.negative? ? "0#{non_zero.call(num)}" : non_zero.call(num) }
+    fill = ->(num){ num < 10 ? "0#{non_zero.call(num)}" : non_zero.call(num) }
 
     tf = Time.at(time_finish)
     ts = Time.at(time_start)
@@ -36,4 +36,6 @@ class Walk < ApplicationRecord
   def finish_it(ftime)
     update(time_finish: ftime)
   end
+
+  #TODO add grouping by day
 end

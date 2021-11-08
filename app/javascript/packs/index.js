@@ -11,10 +11,12 @@ function formatted(sec) {
   var composed = min + "min " + sec  + "s";
   if (hours > 0)
     composed = hours + "h " + composed;
+    
   return composed;
 }
 
 $(document).ready(function() {
+  $('#fill-required').hide(); // not visible until validation fails
 
   // start counters:
   var counterSpan = $('.counter-stopper > span');
@@ -47,7 +49,18 @@ $(document).ready(function() {
   
   $('form #add').click(function (e) {
     e.preventDefault();
-    
+
+    if (!requiredNonempty()) {
+      var fq = $('#fill-required');
+
+      fq.fadeOut(250);
+      setTimeout(function(){
+        fq.text("Fill fields 'Origin', 'Date and start time', 'Destination' and 'Finish time'.").fadeIn();
+      }, 250);
+
+      return;
+    }
+
     $('form').append('<input type="hidden" name="start" value="' + getStart() + '"/>');
     $('form').append('<input type="hidden" name="finish" value="' + getFinish() + '"/>');
     link = "/add-count-walk?origin=" + $('#origin').val() + "&destination=" + $('#destination').val() + "&start=" + getStart() + "&finish=" + getFinish();
@@ -57,6 +70,17 @@ $(document).ready(function() {
   // start counter (save witchout finish time)
   $('form #count').click(function (e) {
     e.preventDefault();
+
+    if (!requiredNonempty()) {
+      var fq = $('#fill-required');
+
+      fq.fadeOut(250);
+      setTimeout(function(){
+        fq.text("Fill fields 'Origin', 'Date and start time' and 'Destination'.").fadeIn();
+      }, 250);
+      
+      return;
+    }
     
     $('form').append('<input type="hidden" name="start" value="' + getStart() + '"/>');
     link = "/add-count-walk?origin=" + $('#origin').val() + "&destination=" + $('#destination').val() + "&start=" + getStart();
@@ -80,4 +104,28 @@ window.getFinish = function() {
   finalDate.setDate(d.getDate());
 
   return Math.floor(finalDate / 1000);
+}
+
+/* check elements selected with 'input[required]' (pass 'false' as second argument to switch this off)
+*   and these from param 'additional' (first argument).
+*  
+*  Use commas in 'additional' instead of passing multiple parameters to function to
+*  provide multiple selection queries, like this: 'input[text], input.important' etc.
+*/
+function requiredNonempty(additional, requiredFileds) {
+  requiredFileds = (typeof requiredFileds !== 'undefined') ?  requiredFileds : true
+
+  var all = [];
+  $('input[required]').each(function(){
+    all.push($(this).val());
+  });
+
+  $(additional).each(function(){
+    all.push($(this).val());
+  });
+
+  if (all.includes(''))
+    return false;
+
+  return true;
 }

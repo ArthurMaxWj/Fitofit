@@ -10,19 +10,19 @@
 <div id="add-walk">
 <form method="GET" action="/add-count-walk">
   <label for="origin">Origin:</label>
-  <input type="text" id="origin" name="origin"><br/>
+  <input type="text" id="origin" name="origin" required><br/>
 
   <label for="sstart">Date and start time:</label>
-  <input type="datetime-local" id="sstart" name="sstart"><br/>
+  <input type="datetime-local" id="sstart" name="sstart" required><br/>
 
   <label for="destination">Destination:</label>
-  <input type="text" id="destination" name="destination"><br/>
+  <input type="text" id="destination" name="destination" required><br/>
 
   <label for="ffinish">Finish time:</label>
   <input type="time" id="ffinish" name="ffinish"> or
   <button id="count"><i class="fas fa-hourglass-start i-btn"></i> Start Counter</button><br/><br/>
 
-  <button id="add"><i class="fas fa-plus i-btn"></i> Add Walk</button>
+  <button id="add"><i class="fas fa-plus i-btn"></i> Add Walk</button> <span id="fill-required">Fill fields 'Origin', 'Date and start time' and 'Destination'.</span>
 </form>
 </div>
 <br/><br/>

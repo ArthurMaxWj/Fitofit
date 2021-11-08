@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   get '/home', to: 'main#index'
   get '/finish-walk', to: 'main#finish_walk'
-  get '/add-count-walk', to: 'main#add_count_walk'
+  get '/add-count-walk', to: 'main#add_count_walk' # both adding of walk and starting a counter
 end

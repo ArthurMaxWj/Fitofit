@@ -1,0 +1,116 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    padding: 0 5px;
+}
+
+/* header: */
+
+header {
+    padding: 10px;
+}
+
+header > h1 {
+    margin: 0;
+    font-family: 'Norican', cursive;
+    font-size: 64px;
+    text-align: center;
+    color: deepskyblue;
+}
+
+
+/* form: */
+
+input[type=text] {
+    width: 210px;
+    outline: 0;
+    border: 0;
+    border-bottom: 2px solid deepskyblue;
+}
+
+input[type=text]:focus {
+    border-bottom: 2px solid cyan;
+}
+
+button {
+    background-color: white;
+    border: 1px solid deepskyblue;
+    color: deepskyblue;
+    cursor: pointer;
+    padding: 2px;
+}
+
+button:active {
+    border: 1px solid cyan;
+    color: cyan;
+}
+
+input {
+    margin-left: 30px;
+}
+
+label {
+    color: darkgray;
+    font-weight: bold;
+    margin-top: 4px;
+    display: block;
+}
+
+/* walks: */
+
+.walk {
+    margin: 4px 0;
+}
+
+.walk > emph {
+    background-color: lavender;
+    font-style: italic; 
+    font-size: 90%;
+}
+
+/* icons: */
+
+i {
+    color: silver;
+    font-size: 110%;
+}
+
+i:not(.i-btn)::before { /* not inside buttons */
+    margin-left: 5px;
+}
+
+i.fa-arrow-right::after {
+    margin-right: 5px;
+}
+
+
+i.fa-equals {
+    font-size: 70%;
+}
+
+i.fa-equals::before {
+    margin-left: 3px;
+}
+
+i.fa-equals::after {
+    margin-right: 3px;
+}
+
+/* icons in buttons */
+
+button i.i-btn {
+    font-size: 105%;
+    color: deepskyblue;
+}
+
+button:active i.i-btn {
+    color: cyan;
+}
+
+/* errors: */
+#fill-required {
+    color: red;
+}
