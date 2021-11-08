@@ -71,6 +71,10 @@ label {
     font-size: 90%;
 }
 
+h3 {
+    display: inline;
+}
+
 /* icons: */
 
 i {
