@@ -2,7 +2,7 @@ require 'json'
 
 class MainController < ApplicationController
   def index
-    @all_walks = Walk.all
+    @walks_in_days = Walk.group_by_day
   end
 
   def finish_walk

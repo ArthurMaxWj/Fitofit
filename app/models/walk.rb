@@ -2,6 +2,8 @@ require 'geocoder'
 
 require 'date'
 
+require './app/services/group_by_day.rb'
+
 class Walk < ApplicationRecord
   # methods extracting essential info and formatting functions:
 
@@ -37,5 +39,7 @@ class Walk < ApplicationRecord
     update(time_finish: ftime)
   end
 
-  #TODO add grouping by day
+  def self.group_by_day
+    GroupByDay.call(Walk.all)
+  end
 end

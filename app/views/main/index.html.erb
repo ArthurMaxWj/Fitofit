@@ -1,7 +1,7 @@
 <%= javascript_pack_tag 'index' %>
 <% 
-  format = '%d/%m/%Y %k:%M' 
-  format_short = '%k:%M'
+  format_no_time = '%d/%m/%Y' 
+  format_only_time = '%k:%M'
 %>
 
 <header><h1>Fit'o'fit</h1></header>
@@ -27,16 +27,24 @@
 </div>
 <br/><br/>
 
-<% @all_walks.reverse_each do |walk| %>
-  <div class="walk" data-start-timestamp="<%= walk.time_start %>" data-origin="<%= walk.origin %>"><%= walk.origin %> 
-  <emph><%= Time.at(walk.time_start).strftime(format) %></emph> <i class="fas fa-arrow-right"></i> <%= walk.destination %> 
-    <%if walk.finished?%>
-    <emph><%= Time.at(walk.time_finish).strftime(format_short)%></emph> <i class="fas fa-equals"></i><i class="fas fa-stopwatch-20"></i> <%= walk.duration_str %> <i class="fas fa-location-arrow"></i> <strong><%= walk.distance_str %></strong> 
+<% 
+reversed = @walks_in_days.to_a.reverse.to_h
+
+reversed.each_key do |key| 
+  walks = reversed[key]
+%>
+  <h3><%= Time.at(walks.first.time_start).strftime(format_no_time) %></h3>
+  <% walks.reverse_each do |walk| %>
+    <div class="walk" data-start-timestamp="<%= walk.time_start %>" data-origin="<%= walk.origin %>"><%= walk.origin %> 
+    <emph><%= Time.at(walk.time_start).strftime(format_only_time) %></emph> <i class="fas fa-arrow-right"></i> <%= walk.destination %> 
+      <%if walk.finished?%>
+      <emph><%= Time.at(walk.time_finish).strftime(format_only_time)%></emph> <i class="fas fa-equals"></i><i class="fas fa-stopwatch-20"></i> <%= walk.duration_str %> <i class="fas fa-location-arrow"></i> <strong><%= walk.distance_str %></strong> 
+      <% end %>
+    <% unless walk.finished? %>
+      <span class="counter-stopper" data-walk-id="<%= walk.id %>" data-start-timestamp="<%= walk.time_start %>"><span>(time)</span><button>Stop</button></span>
     <% end %>
-  <% unless walk.finished? %>
-    <span class="counter-stopper" data-walk-id="<%= walk.id %>" data-start-timestamp="<%= walk.time_start %>"><span>(time)</span><button>Stop</button></span>
+    <button><i class="fas fa-code-branch i-btn"></i> Continue walking</button>
+    </div>
   <% end %>
-  <button><i class="fas fa-code-branch i-btn"></i> Continue walking</button>
-  </div>
 <% end %>
 </main>

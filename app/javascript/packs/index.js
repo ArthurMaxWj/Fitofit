@@ -50,7 +50,7 @@ $(document).ready(function() {
   $('form #add').click(function (e) {
     e.preventDefault();
 
-    if (!requiredNonempty()) {
+    if (!requiredNonempty('input[type=time]')) {
       var fq = $('#fill-required');
 
       fq.fadeOut(250);
