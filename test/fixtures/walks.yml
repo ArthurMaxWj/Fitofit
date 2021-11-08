@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  origin: MyString
+  destination: MyString
+  time_start: 
+  time_finish: 
+
+two:
+  origin: MyString
+  destination: MyString
+  time_start: 
+  time_finish: 
